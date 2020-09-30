@@ -1,0 +1,17 @@
+.month-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.month-select i {
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
+.month-select--month {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1.5em;
+}

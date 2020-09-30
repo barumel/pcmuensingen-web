@@ -1,0 +1,11 @@
+.headroom--pinned {
+  color: red !important;
+  background-color: transparent !important;
+}
+.headroom--unpinned {
+  background-color: #343a40 !important;
+}
+
+.navbar-transparent {
+  background-color: transparent !important;
+}

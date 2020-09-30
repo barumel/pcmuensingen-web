@@ -1,0 +1,38 @@
+.calendar-day {
+  border: 1px solid lightgray;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.calendar-day--name {
+  text-align: center;
+  font-weight: bolder;
+  padding-bottom: 10px;
+}
+
+.calendar-day--content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+}
+
+.calendar-day--overlay {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.2;
+  height: 50%;
+  width: 90%;
+}
+
+.calendar-day--free {
+  background-color: green;
+}
+
+.calendar-day--pending {
+  background-color: yellow;
+}
+
+.calendar-day--booked {
+  background-color: red;
+}

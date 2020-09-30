@@ -1,0 +1,17 @@
+.year-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.year-select i {
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
+.year-select--year {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 1.5em;
+}
