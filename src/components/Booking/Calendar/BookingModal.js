@@ -119,22 +119,22 @@ class BookingModal extends React.Component {
               <Row style={{ width: '100%' }}>
                 <Col lg={12} md={12} sm={12}>
                   <Button
-                    color="mdb-color"
-                    className="booking-modal--button"
-                    onClick={toggle}
-                  >
-                    <FormattedMessage id="Booking.Add.Cancel" />
-                  </Button>
-                </Col>
-
-                <Col lg={12} md={12} sm={12}>
-                  <Button
                     color="light-green"
                     className="booking-modal--button"
                     disabled={!isEmpty(validations)}
                     onClick={this.onSubmit}
                   >
                     <FormattedMessage id="Booking.Add.Submit" />
+                  </Button>
+                </Col>
+
+                <Col lg={12} md={12} sm={12}>
+                  <Button
+                    color="mdb-color"
+                    className="booking-modal--button"
+                    onClick={toggle}
+                  >
+                    <FormattedMessage id="Booking.Add.Cancel" />
                   </Button>
                 </Col>
               </Row>

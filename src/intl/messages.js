@@ -4,6 +4,7 @@ export default {
       Home: 'Startsitä',
       Booking: 'Reservierä',
       Language: 'Sprach',
+      Play: 'Eis spilä',
       Languages: {
         'DE-CH': 'Bärndütsch',
         'DE-DE': 'Deutsch',
@@ -34,6 +35,11 @@ export default {
         EmailConfirm: 'Email adrässä (nomau)'
       }
     },
+    Play: {
+      PageTitle: 'Eis spilä',
+      Paragraph1: 'Wed z fuuu bisch zum Schribä u rächnä chasch das o hie machä.',
+      Paragraph2: 'Eifach unger d Spiler erfasse u när uf Start drückä. D Zahl muesch natürlech immer no säuber igä, aber grächnet wird für di!'
+    },
     Validations: {
       Required: 'Pflichtfäud',
       IsEmail: 'Ke güutigi Email Adrässä',
@@ -46,6 +52,7 @@ export default {
       Home: 'Startseite',
       Booking: 'Reservation',
       Language: 'Sprache',
+      Play: 'Spiel starten',
       Languages: {
         'DE-CH': 'Bärndütsch',
         'DE-DE': 'Deutsch',
@@ -64,6 +71,9 @@ export default {
         Pending: 'Provisorisch reserviert',
         Booked: 'Gebucht'
       }
+    },
+    Play: {
+      PageTitle: 'Eis spilä'
     },
     Validations: {
       Required: 'Pflichtfeld',

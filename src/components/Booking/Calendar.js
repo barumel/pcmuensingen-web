@@ -34,7 +34,6 @@ class Calendar extends React.Component {
   }
 
   addBooking(day) {
-    console.log('TOGGLE MODAL', day.format());
     this.setState({ day, showModal: true });
   }
 

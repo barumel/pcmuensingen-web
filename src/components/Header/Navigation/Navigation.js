@@ -53,9 +53,15 @@ const Navigation = () => {
               </Link>
             </NavItem>
 
-            <NavItem>
+            <NavItem tag={Link} to="/booking">
               <Link to="/booking" className="nav-link">
                 <FormattedMessage id="Navigation.Booking" />
+              </Link>
+            </NavItem>
+
+            <NavItem tag={Link} to="/booking">
+              <Link to="/play" className="nav-link">
+                <FormattedMessage id="Navigation.Play" />
               </Link>
             </NavItem>
 

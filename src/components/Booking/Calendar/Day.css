@@ -23,6 +23,7 @@
   opacity: 0.2;
   height: 50%;
   width: 90%;
+  border-radius: 5px;
 }
 
 .calendar-day--free {

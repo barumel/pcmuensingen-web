@@ -20,6 +20,7 @@ import './App.css';
 import Layout from './containers/Layout';
 import Home from './containers/Home';
 import Booking from './containers/Booking';
+import Play from './containers/Play';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,11 +42,12 @@ class App extends React.Component {
     const locale = get(user, 'locale', get(environment, 'locale', 'de-CH'));
 
     return (
-      <IntlProvider locale={locale} messages={flattenMessages(messages[locale])}>
+      <IntlProvider locale={locale} messages={flattenMessages(messages[locale])} onError={(err) => console.info(err.message)}>
         <Router>
           <Layout>
             <Switch>
               <Route path="/booking" component={Booking} />
+              <Route path="/play" component={Play} />
               <Route path="/" component={Home} />
             </Switch>
           </Layout>

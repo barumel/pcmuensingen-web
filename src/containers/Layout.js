@@ -30,7 +30,7 @@ class Layout extends React.Component {
    */
   render() {
     const { children } = this.props;
-console.log('PROPZ', this.props);
+
     return (
       <React.Fragment>
         <Navigation />

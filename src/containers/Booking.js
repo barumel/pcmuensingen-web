@@ -21,7 +21,7 @@ class Booking extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="page--booking">
         <h1 className="booking--page-title">
           <FormattedMessage id="Booking.PageTitle" />
         </h1>
