@@ -44,6 +44,8 @@ class Play extends React.Component {
           </Col>
         </Row>
 
+        <Row className="spacer-8" />
+
         <Row>
           <Col lg={12} md={12} sm={12}>
             <Platzginator />

@@ -9,6 +9,7 @@ import {
   Button,
   Row,
   Col,
+  Form,
   Label,
   FormGroup
 } from 'reactstrap';
@@ -30,7 +31,7 @@ const PlayerModal = React.memo(({
     toggle();
   };
 
-  const submit = () => {
+  const submit = (ev) => {
     const data = {
       ...player,
       id: get(player, 'id', v4()),
@@ -39,48 +40,53 @@ const PlayerModal = React.memo(({
     setNickname();
     toggle();
     onSubmit(data);
+    ev.preventDefault();
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={onCancel}>
-      <ModalBody>
-        <FormGroup>
-          <Label>
-            <FormattedMessage id="Play.User.Add.Username" />
-          </Label>
+    <Modal isOpen={isOpen} toggle={onCancel} autoFocus={false}>
+      <Form onSubmit={isUndefined(nickname) ? noop : submit}>
+        <ModalBody>
+          <FormGroup>
+            <Label>
+              <FormattedMessage id="Platzginator.Player.Add.Username" />
+            </Label>
 
-          <TextInput
-            id="username"
-            value={nickname}
-            onChange={(id, value) => setNickname(value)}
-          />
-        </FormGroup>
-      </ModalBody>
+            <TextInput
+              id="nickname"
+              value={nickname}
+              onChange={(id, value) => setNickname(value)}
+              autoFocus
+            />
+          </FormGroup>
+        </ModalBody>
 
-      <ModalFooter>
-        <Row style={{ width: '100%' }}>
-          <Col lg={12} md={12} sm={12}>
-            <Button
-              color="light-green"
-              className="play--players-add-user-modal--button"
-              disabled={isUndefined(nickname)}
-              onClick={submit}
-            >
-              <FormattedMessage id="Play.User.Add.Submit" />
-            </Button>
-          </Col>
+        <ModalFooter>
+          <Row style={{ width: '100%' }}>
+            <Col lg={12} md={12} sm={12}>
+              <Button
+                type="submit"
+                color="light-green"
+                className="play--players-add-user-modal--button"
+                disabled={isUndefined(nickname)}
+                onClick={submit}
+              >
+                <FormattedMessage id="Platzginator.Player.Add.Submit" />
+              </Button>
+            </Col>
 
-          <Col lg={12} md={12} sm={12}>
-            <Button
-              color="mdb-color"
-              className="play--players-add-user-modal--button"
-              onClick={onCancel}
-            >
-              <FormattedMessage id="Play.User.Add.Cancel" />
-            </Button>
-          </Col>
-        </Row>
-      </ModalFooter>
+            <Col lg={12} md={12} sm={12}>
+              <Button
+                color="mdb-color"
+                className="play--players-add-user-modal--button"
+                onClick={onCancel}
+              >
+                <FormattedMessage id="General.Button.Cancel" />
+              </Button>
+            </Col>
+          </Row>
+        </ModalFooter>
+      </Form>
     </Modal>
   );
 });

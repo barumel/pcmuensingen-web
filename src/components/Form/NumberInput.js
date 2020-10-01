@@ -5,6 +5,7 @@ import { get, noop } from 'lodash';
 import cl from 'classnames';
 
 const NumberInput = React.memo(({
+  autoFocus,
   className,
   id,
   value,
@@ -21,12 +22,14 @@ const NumberInput = React.memo(({
         value={value}
         onValueChange={handleChange}
         className={cl('form-control', className)}
+        autoFocus={autoFocus}
       />
     </>
   );
 });
 
 NumberInput.propTypes = {
+  autoFocus: PropTypes.bool,
   id: PropTypes.string.isRequired,
   value: PropTypes.number,
   onChange: PropTypes.func,
@@ -38,6 +41,7 @@ NumberInput.propTypes = {
 };
 
 NumberInput.defaultProps = {
+  autoFocus: false,
   value: undefined,
   onChange: noop,
   className: undefined

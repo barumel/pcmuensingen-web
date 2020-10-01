@@ -8,10 +8,19 @@ import './Players.css';
 import List from './Players/List';
 import Modal from './Players/Modal';
 
-const Players = React.memo(({ onAdd, onRemove, players }) => {
+const Players = React.memo(({
+  onAdd,
+  onRemove,
+  players,
+  isGameStarted
+}) => {
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => setShowModal(!showModal);
+
+  const messageId = isGameStarted
+    ? 'Platzginator.Player.Add.Additional'
+    : 'Platzginator.Player.Add.New';
 
   return (
     <div className="platzginator-users">
@@ -30,11 +39,11 @@ const Players = React.memo(({ onAdd, onRemove, players }) => {
 
         <Col lg={4} md={8} sm={12}>
           <Button
-            color="light-green"
+            color="light-blue"
             className="play--players-add--button"
             onClick={toggleModal}
           >
-            <FormattedMessage id="Play.User.Add.New" />
+            <FormattedMessage id={messageId} />
           </Button>
         </Col>
 
@@ -53,13 +62,15 @@ const Players = React.memo(({ onAdd, onRemove, players }) => {
 Players.propTypes = {
   onAdd: PropTypes.func,
   onRemove: PropTypes.func,
-  players: PropTypes.array
+  players: PropTypes.array,
+  isGameStarted: PropTypes.bool
 };
 
 Players.defaultProps = {
   onAdd: noop,
   onRemove: noop,
-  players: []
+  players: [],
+  isGameStarted: false
 };
 
 export default Players;

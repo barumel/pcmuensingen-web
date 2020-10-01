@@ -2,49 +2,57 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { get } from 'lodash';
+import { get, isUndefined } from 'lodash';
 import update from 'immutability-helper';
+import { Button, Row, Col } from 'reactstrap';
+import { FormattedMessage } from 'react-intl';
+import { v4 } from 'uuid';
 
 import './Platzginator.css';
-import Players from '../components/Platzginator/Players';
+import Games from '../components/Platzginator/Games';
 
 class Platzginator extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      players: []
+      games: []
     };
 
-    this.addPlayer = this.addPlayer.bind(this);
-    this.removePlayer = this.removePlayer.bind(this);
+    this.addGame = this.addGame.bind(this);
+    this.onGameChange = this.onGameChange.bind(this);
   }
 
-  addPlayer(player) {
-    const { players } = this.state;
+  onGameChange(game) {
+    const { games } = this.state;
+    const index = games.findIndex((g) => get(g, 'id') === game.id);
 
-    const updated = update(players, { $push: [player] });
+    const updated = update(games, {
+      $splice: [[index, 1, game]]
+    });
 
-    this.setState({ players: updated });
+    this.setState({ games: updated });
   }
 
-  removePlayer(player) {
-    const { players } = this.state;
+  getCurrentGame() {
+    const { games } = this.state;
 
-    const index = players.findIndex((p) => get(p, 'id') === get(player, 'id'));
-
-    if (index > -1) {
-      const updated = update(players, { $splice: [[index, 1]] });
-      this.setState({ players: updated });
-    }
+    return games.find((g) => ['added', 'started', 'paused'].includes(get(g, 'status')));
   }
 
-  start() {
+  addGame() {
+    const { games } = this.state;
 
-  }
+    const game = {
+      id: v4(),
+      status: 'added',
+      players: [],
+      results: []
+    };
 
-  end() {
+    const updated = update(games, { $push: [game] });
 
+    this.setState({ games: updated });
   }
 
   /**
@@ -53,15 +61,34 @@ class Platzginator extends React.Component {
    * @return {ReactElement} markup
    */
   render() {
-    const { players } = this.state;
+    const { games } = this.state;
+    const current = this.getCurrentGame();
 
     return (
       <div className="platzginator">
-        <Players
-          players={players}
-          onAdd={this.addPlayer}
-          onRemove={this.removePlayer}
-        />
+        <Row>
+          <Col lg={12} md={12} sm={12}>
+            <Games
+              games={games}
+              current={current}
+              onGameChange={this.onGameChange}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col lg={4} md={2} sm={0} />
+
+          <Col lg={4} md={8} sm={12}>
+            {isUndefined(current) && (
+              <Button onClick={this.addGame} color="light-green" className="button-full-width">
+                <FormattedMessage id="Platzginator.Game.Add" />
+              </Button>
+            )}
+          </Col>
+
+          <Col lg={4} md={2} sm={0} />
+        </Row>
       </div>
     );
   }

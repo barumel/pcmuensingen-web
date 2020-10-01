@@ -22,6 +22,7 @@ import './Navigation.css';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const close = () => setIsOpen(false);
 
   /*
   useEffect(() => {
@@ -47,19 +48,19 @@ const Navigation = () => {
 
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
-            <NavItem>
+            <NavItem onClick={close}>
               <Link to="/" className="nav-link">
                 <FormattedMessage id="Navigation.Home" />
               </Link>
             </NavItem>
 
-            <NavItem tag={Link} to="/booking">
+            <NavItem tag={Link} to="/booking" onClick={close}>
               <Link to="/booking" className="nav-link">
                 <FormattedMessage id="Navigation.Booking" />
               </Link>
             </NavItem>
 
-            <NavItem tag={Link} to="/booking">
+            <NavItem tag={Link} to="/booking" onClick={close}>
               <Link to="/play" className="nav-link">
                 <FormattedMessage id="Navigation.Play" />
               </Link>
@@ -71,13 +72,13 @@ const Navigation = () => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>
-                  <FormattedMessage id="Navigation.Languages.DE-CH" />
+                  <FormattedMessage id="Navigation.Languages.DE-CH" onClick={close} />
                 </DropdownItem>
                 <DropdownItem>
-                  <FormattedMessage id="Navigation.Languages.DE-DE" />
+                  <FormattedMessage id="Navigation.Languages.DE-DE" onClick={close} />
                 </DropdownItem>
                 <DropdownItem>
-                  <FormattedMessage id="Navigation.Languages.FR-CH" />
+                  <FormattedMessage id="Navigation.Languages.FR-CH" onClick={close} />
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

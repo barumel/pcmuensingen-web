@@ -1,5 +1,10 @@
 export default {
   'de-CH': {
+    General: {
+      Button: {
+        Cancel: 'Ähhh... Doch nid!'
+      }
+    },
     Navigation: {
       Home: 'Startsitä',
       Booking: 'Reservierä',
@@ -45,6 +50,29 @@ export default {
       IsEmail: 'Ke güutigi Email Adrässä',
       IsSameEmail: 'Mues glich si wi di angeri',
       IsInt: 'Mues ä Ganzzau si'
+    },
+    Platzginator: {
+      Game: {
+        Add: 'Nöis Spiu',
+        Start: 'Spiu startä',
+        Pause: 'Spiu pousierä',
+        Cancel: 'Spiu abbrächä',
+        End: 'Spiu beändä',
+        Resume: 'Witermachä'
+      },
+      Players: {
+        Title: 'Spiler für dises Spiu'
+      },
+      Player: {
+        Add: {
+          New: 'Nöiä Spiler erfassä',
+          Additional: 'Isch no ä Spiler drzue cho',
+          Submit: 'Drzue tuä'
+        }
+      },
+      Results: {
+        Title: 'Resultat'
+      }
     }
   },
   'de-DE': {

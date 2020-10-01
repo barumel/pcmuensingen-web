@@ -4,6 +4,7 @@ import { Input } from 'reactstrap';
 import { get, noop } from 'lodash';
 
 const TextInput = React.memo(({
+  autoFocus,
   id,
   type,
   onChange,
@@ -23,6 +24,7 @@ const TextInput = React.memo(({
         type={type}
         value={value || ''}
         onChange={handleChange}
+        autoFocus={autoFocus}
       />
     </>
   );
@@ -32,13 +34,15 @@ TextInput.propTypes = {
   id: PropTypes.string.isRequired,
   value: PropTypes.string,
   type: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  autoFocus: PropTypes.bool
 };
 
 TextInput.defaultProps = {
   value: undefined,
   type: 'text',
-  onChange: noop
+  onChange: noop,
+  autoFocus: false
 };
 
 export default TextInput;
