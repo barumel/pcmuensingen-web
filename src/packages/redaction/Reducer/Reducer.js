@@ -1,4 +1,4 @@
-import { set, defaults } from 'lodash';
+import { has, set, defaults } from 'lodash';
 
 function Reducer({
   defaultState,
@@ -23,6 +23,14 @@ function Reducer({
   }
 
   function addFunction(type, func = redactionNoopReducer) {
+    if (has(functions, type)) {
+      throw new Error(`Function for type ${type} already added!`);
+    }
+
+    set(functions, type, func);
+  }
+
+  function replaceFunction(type, func) {
     set(functions, type, func);
   }
 
@@ -44,6 +52,7 @@ function Reducer({
   return Object.freeze({
     create,
     addFunction,
+    replaceFunction,
     getDefaultState,
     getFunctions
   });

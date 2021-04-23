@@ -20,7 +20,7 @@ class Booking extends React.Component {
     const { bookingActions } = this.props;
 
     console.log('DEITAAA', data);
-    bookingActions.createRequest({ data });
+    bookingActions.createBookingRequest({ data });
   }
 
   /**

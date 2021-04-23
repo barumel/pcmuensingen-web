@@ -1,8 +1,12 @@
 import { Reducers } from '../packages/redaction/index';
 
-import { createReducer } from './Booking/index';
+import {
+  bookingsReducer,
+  createReducer
+} from './Booking/index';
 
 const reducers = Reducers(
+  bookingsReducer,
   createReducer
 );
 
