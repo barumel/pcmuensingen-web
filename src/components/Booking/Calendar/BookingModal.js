@@ -28,8 +28,12 @@ class BookingModal extends React.Component {
     this.setState({ data: updated });
   }
 
-  onSubmit(data) {
+  onSubmit() {
+    const { data } = this.state;
+    const { createBooking } = this.props;
     console.log('SUBMIT', data);
+
+    createBooking(data);
   }
 
   validate() {
@@ -91,7 +95,12 @@ class BookingModal extends React.Component {
 
   render() {
     const { data } = this.state;
-    const { day, isOpen, toggle } = this.props;
+    const {
+      createBooking,
+      day,
+      isOpen,
+      toggle
+    } = this.props;
 
     const validations = this.validate();
 
@@ -109,6 +118,7 @@ class BookingModal extends React.Component {
 
             <ModalBody>
               <BookingForm
+                onSubmit={createBooking}
                 data={data}
                 onChange={this.onFormValueChange}
                 validations={validations}
@@ -147,12 +157,14 @@ class BookingModal extends React.Component {
 }
 
 BookingModal.propTypes = {
+  createBooking: PropTypes.func,
   day: PropTypes.object,
   isOpen: PropTypes.bool,
   toggle: PropTypes.func
 };
 
 BookingModal.defaultProps = {
+  createBooking: noop,
   day: undefined,
   isOpen: false,
   toggle: noop

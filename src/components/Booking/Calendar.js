@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { noop } from 'lodash';
 import moment from 'moment';
 import { extendMoment } from 'moment-range';
 import { Row, Col } from 'reactstrap';
@@ -71,6 +71,7 @@ class Calendar extends React.Component {
       year,
       showModal
     } = this.state;
+    const { createBooking } = this.props;
 
     const now = moment();
 
@@ -94,18 +95,23 @@ class Calendar extends React.Component {
           {this.renderDays()}
         </Row>
 
-        <BookingModal isOpen={showModal} day={day} toggle={this.hideModal} />
+        <BookingModal
+          createBooking={createBooking}
+          isOpen={showModal}
+          day={day}
+          toggle={this.hideModal}
+        />
       </>
     );
   }
 }
 
 Calendar.propTypes = {
-
+  createBooking: PropTypes.func
 };
 
 Calendar.defaultProps = {
-
+  createBooking: noop
 };
 
 export default Calendar;

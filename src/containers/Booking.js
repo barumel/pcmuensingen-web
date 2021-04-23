@@ -7,10 +7,20 @@ import { FormattedMessage } from 'react-intl';
 
 import './Booking.css';
 import Calendar from '../components/Booking/Calendar';
+import bookingActions from '../actions/Booking';
 
 class Booking extends React.Component {
   constructor(props) {
     super(props);
+
+    this.createBooking = this.createBooking.bind(this);
+  }
+
+  createBooking(data) {
+    const { bookingActions } = this.props;
+
+    console.log('DEITAAA', data);
+    bookingActions.createRequest({ data });
   }
 
   /**
@@ -26,14 +36,16 @@ class Booking extends React.Component {
           <FormattedMessage id="Booking.PageTitle" />
         </h1>
 
-        <Calendar />
+        <Calendar
+          createBooking={this.createBooking}
+        />
       </div>
     );
   }
 }
 
 Booking.propTypes = {
-
+  bookingActions: PropTypes.object.isRequired
 };
 
 Booking.defaultProps = {
@@ -47,7 +59,9 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators({}, dispatch) };
+  return {
+    bookingActions: bindActionCreators(bookingActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booking);
