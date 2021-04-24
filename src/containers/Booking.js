@@ -19,7 +19,6 @@ class Booking extends React.Component {
   createBooking(data) {
     const { bookingActions } = this.props;
 
-    console.log('DEITAAA', data);
     bookingActions.createBookingRequest({ data });
   }
 
@@ -29,7 +28,6 @@ class Booking extends React.Component {
    * @return {ReactElement} markup
    */
   render() {
-
     return (
       <div className="page--booking">
         <h1 className="booking--page-title">
@@ -54,7 +52,7 @@ Booking.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-
+    bookings: state.booking.bookings
   };
 }
 

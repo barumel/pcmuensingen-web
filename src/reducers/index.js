@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import bookingReducers from './Booking';
+import userReducers from './User';
 
 export default combineReducers({
-  foo: () => 'foo',
-  booking: bookingReducers
+  booking: bookingReducers,
+  user: userReducers
 });

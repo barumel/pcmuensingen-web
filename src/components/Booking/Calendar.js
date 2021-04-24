@@ -107,10 +107,12 @@ class Calendar extends React.Component {
 }
 
 Calendar.propTypes = {
+  bookings: PropTypes.object,
   createBooking: PropTypes.func
 };
 
 Calendar.defaultProps = {
+  bookings: {},
   createBooking: noop
 };
 

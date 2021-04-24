@@ -1,7 +1,4 @@
-import { call, put } from 'redux-saga/effects';
-import { get } from 'lodash';
-import { v4 } from 'uuid';
-import axios from 'axios';
+import { put } from 'redux-saga/effects';
 
 import { createAction } from '../../actions/Booking/Create';
 
@@ -10,11 +7,14 @@ export default function* createCard(request) {
     yield put({ type: createAction.getType('PENDING') });
     const { data } = request;
 
-    console.log('DEOTAAAAA', data);
+    const payload = {
+      ...data,
+      type: 'pending'
+    };
 
-    yield put({ type: createAction.getType('FULFILLED'), payload: data });
+    yield put({ type: createAction.getType('FULFILLED'), payload });
 
-    return data;
+    return payload;
   } catch (error) {
     yield put({ type: createAction.getType('REJECTED'), error });
 

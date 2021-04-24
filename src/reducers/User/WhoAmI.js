@@ -2,23 +2,20 @@ import update from 'immutability-helper';
 import { get } from 'lodash';
 
 import { DefaultReducer } from '../../packages/redaction/index';
-import { createAction } from '../../actions/Booking/Create';
+import { whoAmIAction } from '../../actions/User/WhoAmI';
+import Acl from '../../packages/acl/Acl';
 
 export const reducer = DefaultReducer({
-  action: createAction,
-  key: 'create'
+  action: whoAmIAction,
+  key: 'session'
 });
 
-function onBookingCreateFulfilled(state, action) {
+function onWhoAmIFulfilled(state, action) {
   const payload = get(action, 'payload');
-  const bookings = get(state, 'bookings.data', []);
-  const updated = update(bookings, { $push: [payload] });
 
   return update(state, {
-    bookings: {
-      data: { $set: updated }
-    },
-    create: {
+    acl: { $set: Acl({ user: payload, permissions: [] }) },
+    session: {
       requesting: { $set: false },
       pending: { $set: false },
       fulfilled: { $set: true },
@@ -29,8 +26,8 @@ function onBookingCreateFulfilled(state, action) {
 }
 
 reducer.replaceFunction(
-  createAction.getType('FULFILLED'),
-  onBookingCreateFulfilled
+  whoAmIAction.getType('FULFILLED'),
+  onWhoAmIFulfilled
 );
 
 export default reducer.create();
