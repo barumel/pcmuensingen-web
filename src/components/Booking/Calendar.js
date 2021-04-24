@@ -93,11 +93,11 @@ class Calendar extends React.Component {
           <Col lg={2} md={1} sm={0} />
 
           <Col lg={4} md={5} sm={12}>
-            <YearSelect year={year} onChange={this.onYearChange} />
+            <MonthSelect month={month} onChange={this.onMonthChange} min={now.year() === year ? now.month() : 0} />
           </Col>
 
           <Col lg={4} md={5} sm={12}>
-            <MonthSelect month={month} onChange={this.onMonthChange} min={now.year() === year ? now.month() : 0} />
+            <YearSelect year={year} onChange={this.onYearChange} />
           </Col>
 
           <Col lg={2} md={1} sm={0} />
