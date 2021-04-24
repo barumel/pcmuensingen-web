@@ -28,6 +28,8 @@ class Booking extends React.Component {
    * @return {ReactElement} markup
    */
   render() {
+    const { bookings } = this.props;
+
     return (
       <div className="page--booking">
         <h1 className="booking--page-title">
@@ -35,6 +37,7 @@ class Booking extends React.Component {
         </h1>
 
         <Calendar
+          bookings={bookings}
           createBooking={this.createBooking}
         />
       </div>
@@ -43,11 +46,12 @@ class Booking extends React.Component {
 }
 
 Booking.propTypes = {
-  bookingActions: PropTypes.object.isRequired
+  bookingActions: PropTypes.object.isRequired,
+  bookings: PropTypes.object
 };
 
 Booking.defaultProps = {
-
+  bookings: {}
 };
 
 function mapStateToProps(state, ownProps) {

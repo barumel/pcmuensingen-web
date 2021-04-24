@@ -9,7 +9,7 @@ export default function* createCard(request) {
 
     const payload = {
       ...data,
-      type: 'pending'
+      status: 'pending'
     };
 
     yield put({ type: createAction.getType('FULFILLED'), payload });

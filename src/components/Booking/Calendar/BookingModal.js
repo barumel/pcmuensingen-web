@@ -30,13 +30,14 @@ class BookingModal extends React.Component {
   }
 
   onSubmit() {
-    const { data } = this.state;
+    const { data, toggle } = this.state;
     const {
       createBooking,
       day
     } = this.props;
 
     createBooking({ ...data, date: day.format() });
+    toggle();
   }
 
   validate() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import { get, noop, isUndefined } from 'lodash';
 import moment from 'moment';
 import { extendMoment } from 'moment-range';
 import { Row, Col } from 'reactstrap';
@@ -43,20 +43,32 @@ class Calendar extends React.Component {
 
   renderDays() {
     const { month, year } = this.state;
+    const { bookings } = this.props;
+
     const r = extendMoment(moment);
     const m = moment().year(year).month(month.month());
 
     const range = r().range(moment(m).startOf('month'), moment(m).endOf('month'));
     const days = range.by('days');
 
-    return [...days].map((day) => (
-      <Col key={day} lg={2} md={2} sm={12}>
-        <Day
-          addBooking={this.addBooking}
-          day={day}
-        />
-      </Col>
-    ));
+    return [...days].map((day) => {
+      const booking = get(bookings, 'data', []).find((b) => {
+        const date = get(b, 'date');
+        if (isUndefined(date)) return undefined;
+
+        return day.isSame(moment(date), 'day');
+      });
+
+      return (
+        <Col key={day} lg={2} md={2} sm={12}>
+          <Day
+            addBooking={this.addBooking}
+            day={day}
+            status={get(booking, 'status')}
+          />
+        </Col>
+      );
+    });
   }
 
   /**
