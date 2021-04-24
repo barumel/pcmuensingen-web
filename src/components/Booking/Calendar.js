@@ -5,7 +5,13 @@ import moment from 'moment';
 import { extendMoment } from 'moment-range';
 import { Row, Col } from 'reactstrap';
 
-import { Day, MonthSelect, YearSelect, BookingModal } from './Calendar/index';
+import {
+  Day,
+  MonthSelect,
+  YearSelect,
+  BookingModal,
+  BookingDetailModal
+} from './Calendar/index';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -14,14 +20,17 @@ class Calendar extends React.Component {
     this.state = {
       month: moment(),
       year: moment().year(),
-      showModal: false,
+      showBookingModal: false,
+      showDetailModal: false,
       day: undefined
     };
 
     this.addBooking = this.addBooking.bind(this);
     this.onMonthChange = this.onMonthChange.bind(this);
     this.onYearChange = this.onYearChange.bind(this);
-    this.hideModal = this.hideModal.bind(this);
+    this.hideBookingModal = this.hideBookingModal.bind(this);
+    this.showDetail = this.showDetail.bind(this);
+    this.hideDetailModal = this.hideDetailModal.bind(this);
   }
 
   onYearChange(year) {
@@ -34,11 +43,19 @@ class Calendar extends React.Component {
   }
 
   addBooking(day) {
-    this.setState({ day, showModal: true });
+    this.setState({ day, showBookingModal: true });
   }
 
-  hideModal() {
-    this.setState({ day: undefined, showModal: false });
+  hideBookingModal() {
+    this.setState({ day: undefined, showBookingModal: false });
+  }
+
+  showDetail() {
+    this.setState({ showDetailModal: true });
+  }
+
+  hideDetailModal() {
+    this.setState({ showDetailModal: false });
   }
 
   renderDays() {
@@ -63,6 +80,7 @@ class Calendar extends React.Component {
         <Col key={day} lg={2} md={2} sm={12}>
           <Day
             addBooking={this.addBooking}
+            showDetail={this.showDetail}
             day={day}
             status={get(booking, 'status')}
           />
@@ -81,7 +99,8 @@ class Calendar extends React.Component {
       day,
       month,
       year,
-      showModal
+      showBookingModal,
+      showDetailModal,
     } = this.state;
     const { createBooking } = this.props;
 
@@ -109,9 +128,14 @@ class Calendar extends React.Component {
 
         <BookingModal
           createBooking={createBooking}
-          isOpen={showModal}
+          isOpen={showBookingModal}
           day={day}
-          toggle={this.hideModal}
+          toggle={this.hideBookingModal}
+        />
+
+        <BookingDetailModal
+          isOpen={showDetailModal}
+          toggle={this.hideDetailModal}
         />
       </>
     );

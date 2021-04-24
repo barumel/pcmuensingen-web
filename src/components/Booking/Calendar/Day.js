@@ -13,8 +13,13 @@ const messageIds = {
   booked: 'Booking.Status.Booked'
 };
 
-const Day = React.memo(({ addBooking, status, day }) => {
-  const disabled = day.startOf('day').isBefore(moment().startOf('day'));
+const Day = React.memo(({
+  addBooking,
+  status,
+  showDetail,
+  day
+}) => {
+  const disabled = day.startOf('day').isBefore(moment().startOf('day')) || status !== 'free';
 
   const overlayClassName = cl({
     'calendar-day--overlay': true,
@@ -24,10 +29,17 @@ const Day = React.memo(({ addBooking, status, day }) => {
     'calendar-day--free': status === 'free'
   });
 
+  const onClick = disabled
+    ? noop
+    : status === 'free'
+      ? () => addBooking(day)
+      // Add acl check
+      : showDetail;
+
   return (
     <div
       className="calendar-day"
-      onClick={disabled ? noop : () => addBooking(day)}
+      onClick={onClick}
     >
       <div className="calendar-day--name">
         <div>{day.format('dddd')}</div>
@@ -47,12 +59,14 @@ const Day = React.memo(({ addBooking, status, day }) => {
 Day.propTypes = {
   addBooking: PropTypes.func,
   status: PropTypes.string,
-  day: PropTypes.object.isRequired
+  day: PropTypes.object.isRequired,
+  showDetail: PropTypes.func
 };
 
 Day.defaultProps = {
   addBooking: noop,
-  status: 'free'
+  status: 'free',
+  showDetail: noop
 };
 
 export default Day;
