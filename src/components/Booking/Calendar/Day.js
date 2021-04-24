@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classnames';
 import { get, noop } from 'lodash';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
 
 import './Day.css';
 
@@ -13,8 +14,11 @@ const messageIds = {
 };
 
 const Day = React.memo(({ addBooking, status, day }) => {
+  const disabled = day.startOf('day').isBefore(moment().startOf('day'));
+
   const overlayClassName = cl({
     'calendar-day--overlay': true,
+    'calendar-day--overlay-disabled': disabled,
     'calendar-day--booked': status === 'booked',
     'calendar-day--pending': status === 'pending',
     'calendar-day--free': status === 'free'
@@ -23,7 +27,7 @@ const Day = React.memo(({ addBooking, status, day }) => {
   return (
     <div
       className="calendar-day"
-      onClick={() => addBooking(day)}
+      onClick={disabled ? noop : () => addBooking(day)}
     >
       <div className="calendar-day--name">
         <div>{day.format('dddd')}</div>

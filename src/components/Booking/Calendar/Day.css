@@ -26,6 +26,10 @@
   border-radius: 5px;
 }
 
+.calendar-day--overlay-disabled {
+  background-color: lightgray !important;
+}
+
 .calendar-day--free {
   background-color: green;
 }

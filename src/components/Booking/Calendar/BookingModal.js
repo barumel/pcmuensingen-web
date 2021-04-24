@@ -4,6 +4,7 @@ import { get, noop, isEmpty } from 'lodash';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Row, Col } from 'reactstrap';
 import { FormattedMessage } from 'react-intl';
 import update from 'immutability-helper';
+import moment from 'moment';
 
 import './BookingModal.css';
 import BookingForm from './BookingForm';
@@ -30,10 +31,12 @@ class BookingModal extends React.Component {
 
   onSubmit() {
     const { data } = this.state;
-    const { createBooking } = this.props;
-    console.log('SUBMIT', data);
+    const {
+      createBooking,
+      day
+    } = this.props;
 
-    createBooking(data);
+    createBooking({ ...data, date: day.format() });
   }
 
   validate() {
