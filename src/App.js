@@ -14,6 +14,7 @@ import moment from 'moment';
 import 'moment/locale/fr-ch';
 import 'moment/locale/de-ch';
 
+import './bootstrap.css';
 import './App.css';
 import Layout from './containers/Layout';
 import Home from './containers/Home';
